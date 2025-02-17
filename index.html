@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="/inputter/inputter-m.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz@8..144&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto Flex', sans-serif;
+            font-size: 20px;
+            background-color: #ddd;
+        }
+
+        article {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 0;
+        }
+
+        h2 {
+            font-size: 1em;
+            font-weight: normal;
+        }
+
+        h4 {
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+
+        article section {
+            margin-top: 40px;
+        }
+        article section:first-of-type {
+            margin-top: 80px;
+        }
+
+        p {
+            font-size: 0.75em;
+            margin-top: 12px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            font-size: inherit;
+        }
+
+        section > ul {
+            margin: 0;
+            list-style: none;
+            padding: 0;
+        }
+
+        section > ul > li:before {
+            content: "";
+            background-color: #999;
+            position: absolute;
+            left: 0;
+            width: 24px;
+            height: 3px;
+            top: 10px;
+        }
+
+        section > ul > li {
+            margin: 0 0 20px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        ul li ul {
+            font-size: 0.75em;
+        }
+
+        p + ul {
+            margin-top: -10px;
+        }
+
+        .demo div {
+            margin-top: 20px;
+        }
+
+        .demo div:first-of-type {
+            margin-top: 0;
+        }
+
+        .demo div span {
+            display: inline-block;
+            margin-left: 30px;
+            color: #0055cc;
+            font-size: 0.75em;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<article>
+    <h1>inputter-m</h1>
+    <h2>Веб-компонент</h2>
+
+    <section>
+        <h3>Возможности: </h3>
+
+        <ul>
+            <li>
+                <h4>Настраиваемый суффикс</h4>
+
+                <p>
+                    Как правило единица измерения или расшифровка:
+                </p>
+
+                <ul>
+                    <li>12.3 <strong>м<sup>2</sup></strong></li>
+                    <li>900 <strong>упак</strong></li>
+                    <li>200 <strong>штук</strong></li>
+                </ul>
+
+                <p>
+                    Указывается через дата-атрибут <strong>data-suffix="см"</strong>.
+                </p>
+            </li>
+
+            <li>
+                <h4>Галочка подтверждения</h4>
+
+                <p>Активный элемент внутри веб-компонента, который подтверждает завершение ввода и принятие введённого значения.</p>
+
+                <p>Активируется через дата-атрибут <strong>data-mode="approvable"</strong>.</p>
+
+                <p>Пока ввод не подтверждён, редактирование может быть отменено (<em>клавиша Esc</em> или <em>клик за границами поля ввода</em>).
+                </p>
+            </li>
+        </ul>
+    </section>
+
+    <section class="demo">
+        <h3>Кликаем:</h3>
+
+        <div>
+            Площадь:
+            <inputter-m
+                    data-field-type="number"
+                    data-empty-value="0"
+                    data-suffix="м2"
+                    data-mode="approvable"
+            ></inputter-m>
+
+            <span>Результат: <em>...</em></span>
+        </div>
+        <div>
+            Длина:
+            <inputter-m
+                    data-field-type="number"
+                    data-empty-value="0"
+                    data-suffix="см"
+                    data-mode="approvable"
+            ></inputter-m>
+
+            <span>Результат: <em>...</em></span>
+        </div>
+        <div>
+            Артикул:
+            <inputter-m
+                    data-field-type="free"
+                    data-empty-value=""
+                    data-min-width="175"
+                    placeholder="Введите артикул"
+                    data-suffix=""
+                    data-mode="approvable"
+            ></inputter-m>
+
+            <span>Результат: <em>...</em></span>
+        </div>
+    </section>
+</article>
+
+<script>
+    const inputters = document.querySelectorAll('inputter-m');
+    inputters.forEach(inputter => {
+        let indicator = inputter.parentNode.querySelector('span em');
+        if (!indicator) {
+            return;
+        }
+
+        inputter.addEventListener('change', (e) => {
+            indicator.textContent = e.target.value;
+            console.log(e.target.value);
+        });
+    });
+</script>
+
+</body>
+</html>
