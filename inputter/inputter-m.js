@@ -220,7 +220,7 @@ class InputterSuffixOrNot extends HTMLElement {
 
             let cssFile = this.getAttribute('data-css-file');
             if (!cssFile) {
-                cssFile = '/inputter/inputter-m.css';
+                cssFile = '/inputter-m/inputter/inputter-m.css';
             }
 
             if (cssFile && cssFileMTime) {
